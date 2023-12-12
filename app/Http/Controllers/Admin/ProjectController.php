@@ -89,6 +89,15 @@ class ProjectController extends Controller
         }else{
             $form_data['slug'] = $project->slug;
         }
+
+        if(array_key_exists('image', $form_data)){
+            if($project->image){
+                Storage::disk('public')->delete($project->image);
+            }
+            $form_data['image_name'] = $request->file('image')->getClientOriginalName();
+            $form_data['image'] = Storage::put('uploads', $form_data['image']);
+        }
+
         $project->update($form_data);
 
         if(array_key_exists('technologies', $form_data)){
