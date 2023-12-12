@@ -1,4 +1,4 @@
-@php
+ @php
     use App\Functions\Helper;
 @endphp
 
@@ -7,6 +7,15 @@
 @section('content')
 <div class="container">
     <div class="card p-5">
+
+        @if ($project->image !== null)
+            <div class="w-50">
+                <img class="img-fluid" src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->name }}">
+                <p>{{ $project->image_name }}</p>
+            </div>
+        @endif
+
+
         <div class="card-body">
             <h2>{{ $project->name }}</h2>
 

@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->string('name',100);
+            $table->string('image')->nullable();
+            $table->string('image_name')->nullable();
+            $table->string('link_git')->nullable();
             $table->decimal('version',6,3)->nullable();
             $table->text('description');
             $table->date('date_updated');

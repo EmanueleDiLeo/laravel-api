@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Project;
 use App\Functions\Helper;
 use App\Models\Type;
@@ -43,6 +44,11 @@ class ProjectController extends Controller
         $form_data = $request->all();
 
         $form_data['slug'] = Helper::generateSlug($form_data['name'], Project::class);
+
+        if(array_key_exists('image', $form_data)) {
+            $form_data['image_name'] = $request->file('image')->getClientOriginalName();
+            $form_data['image'] = Storage::put('uploads', $form_data['image']);
+        }
 
         $new_project = Project::create($form_data);
         if(array_key_exists('technologies', $form_data)){
@@ -100,6 +106,11 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+
+        if($project->image){
+            Storage::disk('public')->delete($project->image);
+        }
+
         $project->delete();
         return redirect()->route('admin.projects.index')->with('deleted', "Il progetto $project->name è stato eliminato correttamente!");
     }

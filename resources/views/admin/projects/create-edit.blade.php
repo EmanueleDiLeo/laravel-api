@@ -26,18 +26,37 @@
                 @csrf
                 @method($method)
                 <div class="mb-3">
-                    <label for="title" class="form-label">Nome Progetto *</label>
+                    <label for="name" class="form-label">Nome Progetto *</label>
                     <input
                     id="name"
                     class="form-control @error('name') is-invalid @enderror"
                     name="name"
                     type="text"
-                    value="{{ old('title', $project?->name) }}"
+                    value="{{ old('name', $project?->name) }}"
                     >
                     @error('name')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Immagine</label>
+                    <input
+                      id="image"
+                      class="form-control @error('image') is-invalid @enderror"
+                      name="image"
+                      type="file"
+                      onchange="showImage(event)"
+                      value="{{ old('image', $project?->image) }}"
+                    >
+                    @error('image')
+                        <p class="text-danger">{{ $image }}</p>
+                    @enderror
+
+                    <img id="thumb" width="150" onerror="this.src='/img/placeholder.webp'"  src="{{ asset('storage/' . $project?->image) }}" />
+
+                </div>
+
                 <div class="mb-3">
                     <label for="date_updated" class="form-label">Data ultimo aggiornamento *</label>
                     <input
