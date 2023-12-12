@@ -19,8 +19,19 @@ class ProjectController extends Controller
     public function getProjectBySlug($slug){
         // $project = Project::where('slug',$slug)->first();
         $project = Project::where('slug',$slug)->with('type', 'technologies')->first();
+
         if($project) $success = true;
         else $success = false;
+
+        if($success){
+            if($project->image){
+                $project->image = asset('storage/' . $project->image);
+            }else{
+                $project->image = asset('storage/uploads/placeholder.webp');
+            }
+        }
+
+
         return response()->json(compact('project', 'success') );
     }
 }
