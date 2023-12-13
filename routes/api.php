@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\LeadController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,5 @@ use App\Http\Controllers\Api\ProjectController;
 
 Route::get('/projects',[ProjectController::class, 'index']);
 Route::get('/projects/get-project/{slug}',[ProjectController::class, 'getProjectBySlug']);
+Route::get('/send-email',[LeadController::class, 'store']);
+
