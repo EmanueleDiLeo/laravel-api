@@ -19,5 +19,5 @@ use App\Http\Controllers\Api\LeadController;
 
 Route::get('/projects',[ProjectController::class, 'index']);
 Route::get('/projects/get-project/{slug}',[ProjectController::class, 'getProjectBySlug']);
-Route::get('/send-email',[LeadController::class, 'store']);
+Route::post('/send-email',[LeadController::class, 'store']);
 
