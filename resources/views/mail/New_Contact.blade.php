@@ -4,5 +4,5 @@
     Nome: {{$lead->name}} <br>
     Email: {{$lead->email}} <br>
     Messaggio: <br>
-    {{$lead->messagge}}
+    {{$lead->message}}
 </p>
